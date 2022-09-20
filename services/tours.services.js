@@ -17,3 +17,19 @@ module.exports.createTourService = async (tourData) => {
   const result = await Tour.create(tourData);
   return result;
 };
+
+module.exports.getTourByIdService = async (tourId) => {
+  const tour = Tour.findById(tourId);
+  return tour;
+};
+
+module.exports.updateTourService = async (tourId, data) => {
+  const result = await Tour.updateOne(
+    { _id: tourId },
+    { $set: data },
+    {
+      runValidators: true,
+    }
+  );
+  return result;
+};
