@@ -45,3 +45,8 @@ module.exports.getTrendingToursService = async () => {
   const tours = await Tour.find({}).sort("-viewCount").limit(3);
   return tours;
 };
+
+module.exports.deleteTourService = async (tourId, data) => {
+  const result = await Tour.deleteOne({ _id: tourId });
+  return result;
+};

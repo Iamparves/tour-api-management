@@ -5,6 +5,7 @@ const {
   updateTourService,
   getCheapestToursService,
   getTrendingToursService,
+  deleteTourService,
 } = require("../services/tours.services");
 
 module.exports.getTours = async (req, res, next) => {
@@ -119,4 +120,28 @@ module.exports.getTrendingTours = async (req, res, next) => {
       error: err.message,
     });
   }
-}
+};
+
+module.exports.deleteTour = async (req, res, next) => {
+  try {
+    const result = await deleteTourService(req.params.id);
+
+    if (!result.deletedCount) {
+      return res.status(400).json({
+        success: false,
+        message: "Couldn't delete the tour"
+      });
+    }
+
+    res.status(200).send({
+      success: true,
+      message: "Tour deleted successfully",
+    });
+  } catch (err) {
+    res.status(400).json({
+      success: false,
+      message: "Couldn't delete the tour",
+      error: err.message,
+    });
+  }
+};
