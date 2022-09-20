@@ -55,6 +55,13 @@ module.exports.createTour = async (req, res, next) => {
 module.exports.getTourById = async (req, res, next) => {
   try {
     const tour = await getTourByIdService(req.params.id);
+    if (!tour) {
+      res.status(400).json({
+        success: false,
+        message: "Couldn't find the tour",
+      });
+    }
+
     res.status(200).send({
       success: true,
       message: "Found the tour",
@@ -129,7 +136,7 @@ module.exports.deleteTour = async (req, res, next) => {
     if (!result.deletedCount) {
       return res.status(400).json({
         success: false,
-        message: "Couldn't delete the tour"
+        message: "Couldn't delete the tour",
       });
     }
 

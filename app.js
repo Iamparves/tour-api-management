@@ -7,7 +7,7 @@ app.use(express.json());
 
 // routes
 const tourRoutes = require("./routes/v1/tours.routes");
-app.use("/api/v1/tours", tourRoutes);
+app.use("/api/v1", tourRoutes);
 
 app.get("/", (req, res) => {
   res.send("Welcome to Tour Management API Service");

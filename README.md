@@ -26,22 +26,22 @@
 
     - Increase the view count by 1 for this tour every time a user hits this endpoint.
 
-##### PATCH /api/v1/tours/:id
+##### PATCH /api/v1/tour/:id
 
     - Update a tour
 
     - (BONUS) Body should be validated
 
-##### GET /api/v1/tours/trending
+##### GET /api/v1/tour/trending
 
     - Get top 3 viewed tours
 
-##### GET /api/v1/tours/cheapest
+##### GET /api/v1/tour/cheapest
 
     - Get top 3 cheapest tours
 
 ## Extra:
 
-##### DELETE /api/v1/tours/:id
+##### DELETE /api/v1/tour/:id
 
     - Delete a tour
