@@ -14,12 +14,14 @@ module.exports.getToursService = async (filters, queries) => {
 };
 
 module.exports.createTourService = async (tourData) => {
+  tourData.viewCount = 0;
   const result = await Tour.create(tourData);
   return result;
 };
 
 module.exports.getTourByIdService = async (tourId) => {
-  const tour = Tour.findById(tourId);
+  await Tour.updateOne({ _id: tourId }, { $inc: { viewCount: 1 } });
+  const tour = await Tour.findById(tourId);
   return tour;
 };
 
@@ -36,5 +38,10 @@ module.exports.updateTourService = async (tourId, data) => {
 
 module.exports.getCheapestToursService = async () => {
   const tours = await Tour.find({}).sort("price").limit(3);
+  return tours;
+};
+
+module.exports.getTrendingToursService = async () => {
+  const tours = await Tour.find({}).sort("-viewCount").limit(3);
   return tours;
 };

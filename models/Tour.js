@@ -67,6 +67,7 @@ const tourSchema = mongoose.Schema(
       type: String,
       required: [true, "please provide a tour description"],
     },
+    viewCount: Number,
   },
   { timestamps: true }
 );

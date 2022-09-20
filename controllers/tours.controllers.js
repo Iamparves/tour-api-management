@@ -4,6 +4,7 @@ const {
   getTourByIdService,
   updateTourService,
   getCheapestToursService,
+  getTrendingToursService,
 } = require("../services/tours.services");
 
 module.exports.getTours = async (req, res, next) => {
@@ -90,14 +91,32 @@ module.exports.getCheapestTours = async (req, res, next) => {
 
     res.status(200).send({
       success: true,
-      message: "Top 3 cheapest tours found successfully",
+      message: "Cheapest tours found successfully",
       data: tours,
     });
   } catch (err) {
     res.status(400).json({
       success: false,
-      message: "Couldn't find tours",
+      message: "Couldn't find cheapest tours",
       error: err.message,
     });
   }
 };
+
+module.exports.getTrendingTours = async (req, res, next) => {
+  try {
+    const tours = await getTrendingToursService();
+
+    res.status(200).send({
+      success: true,
+      message: "Trending tours found successfully",
+      data: tours,
+    });
+  } catch (err) {
+    res.status(400).json({
+      success: false,
+      message: "Couldn't find trending tours",
+      error: err.message,
+    });
+  }
+}
