@@ -3,6 +3,7 @@ const {
   getToursService,
   getTourByIdService,
   updateTourService,
+  getCheapestToursService,
 } = require("../services/tours.services");
 
 module.exports.getTours = async (req, res, next) => {
@@ -78,6 +79,24 @@ module.exports.updateTour = async (req, res, next) => {
     res.status(400).json({
       success: false,
       message: "Couldn't update the tour",
+      error: err.message,
+    });
+  }
+};
+
+module.exports.getCheapestTours = async (req, res, next) => {
+  try {
+    const tours = await getCheapestToursService();
+
+    res.status(200).send({
+      success: true,
+      message: "Top 3 cheapest tours found successfully",
+      data: tours,
+    });
+  } catch (err) {
+    res.status(400).json({
+      success: false,
+      message: "Couldn't find tours",
       error: err.message,
     });
   }

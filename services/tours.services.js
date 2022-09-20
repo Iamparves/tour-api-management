@@ -33,3 +33,8 @@ module.exports.updateTourService = async (tourId, data) => {
   );
   return result;
 };
+
+module.exports.getCheapestToursService = async () => {
+  const tours = await Tour.find({}).sort("price").limit(3);
+  return tours;
+};
